@@ -11,7 +11,7 @@ def add(a: int, b: int) -> int:
     return a + b
 
 
-def search(query: str, limit: int = 5, exact: bool = False, score: float = 0.5, tags: list = None, raw=None):
+def search(query: str, limit: int = 5, exact: bool = False, score: float = 0.5, tags: list = (), raw=None):
     return []
 
 
