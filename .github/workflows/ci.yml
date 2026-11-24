@@ -1,0 +1,26 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ["3.10", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: pip install pytest
+      - name: solutions pass every test
+        run: pytest -q
+        env:
+          KATA_SOLUTIONS: "1"
+      - name: exercises match solutions
+        run: python tools/make_exercises.py --check
+      - name: runner reports the first exercise as todo
+        shell: bash
+        run: |
+          python -m agentkata > out.txt || true
+          grep -q "todo ex01_messages" out.txt

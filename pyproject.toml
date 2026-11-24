@@ -1,0 +1,13 @@
+[project]
+name = "agentkata"
+version = "0.1.0"
+description = "Learn to build AI agents from scratch, one failing test at a time. Offline, no API key."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+dependencies = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-p no:asyncio"
